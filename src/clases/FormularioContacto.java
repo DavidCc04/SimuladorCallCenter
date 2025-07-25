@@ -130,7 +130,6 @@ public class FormularioContacto extends javax.swing.JFrame {
         textTelefono = new javax.swing.JTextField();
         provinciasComboBox = new javax.swing.JComboBox<>();
         PanelLLamadas = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListPendientes = new javax.swing.JList<>();
@@ -143,6 +142,7 @@ public class FormularioContacto extends javax.swing.JFrame {
         LblTiempo = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         PanelControl = new javax.swing.JPanel();
         bAbrir = new javax.swing.JButton();
         bImportar = new javax.swing.JButton();
@@ -313,13 +313,6 @@ public class FormularioContacto extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Contactar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Siguiente");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,6 +344,13 @@ public class FormularioContacto extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Contactar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLLamadasLayout = new javax.swing.GroupLayout(PanelLLamadas);
         PanelLLamadas.setLayout(PanelLLamadasLayout);
         PanelLLamadasLayout.setHorizontalGroup(
@@ -358,7 +358,11 @@ public class FormularioContacto extends javax.swing.JFrame {
             .addGroup(PanelLLamadasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLLamadasLayout.createSequentialGroup()
+                        .addComponent(LblTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(324, 324, 324))
                     .addGroup(PanelLLamadasLayout.createSequentialGroup()
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLLamadasLayout.createSequentialGroup()
@@ -368,57 +372,56 @@ public class FormularioContacto extends javax.swing.JFrame {
                                 .addComponent(jTextField1)
                                 .addGap(21, 21, 21)))
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4))
+                        .addGap(51, 51, 51)
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Pendientes)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
-                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Atendidos)))
-                    .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(148, 148, 148)
-                        .addComponent(jButton2)))
-                .addGap(43, 43, 43))
+                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                                .addComponent(Pendientes)
+                                .addGap(148, 148, 148)
+                                .addComponent(Atendidos))
+                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                                .addGap(188, 188, 188)
+                                .addComponent(jButton2))
+                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))))
         );
         PanelLLamadasLayout.setVerticalGroup(
             PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                                .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22))
-                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(Pendientes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                                .addComponent(LblTiempo)
-                                .addGap(31, 31, 31)
-                                .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton4))
-                                .addGap(60, 60, 60))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(LblTiempo)
+                        .addGap(31, 31, 31)
+                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelLLamadasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
-                        .addComponent(Atendidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                                .addComponent(Pendientes)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
+                                .addComponent(Atendidos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 17, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         bAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/folder_edit.png"))); // NOI18N
@@ -527,7 +530,7 @@ public class FormularioContacto extends javax.swing.JFrame {
                                 .addComponent(bAbrir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bImportar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(13, 13, 13))))
         );
@@ -555,16 +558,14 @@ public class FormularioContacto extends javax.swing.JFrame {
         panelListaContLayout.setHorizontalGroup(
             panelListaContLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelListaContLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelListaContLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelLLamadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelListaContLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                        .addComponent(PanelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelListaContLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(PanelLLamadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         panelListaContLayout.setVerticalGroup(
             panelListaContLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,7 +593,7 @@ public class FormularioContacto extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelListaCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -677,8 +678,9 @@ public class FormularioContacto extends javax.swing.JFrame {
     private void bBusqueAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBusqueAActionPerformed
         this.estadoB = !estadoB;
         if (estadoB) {
-            int w = INITIAL_WEIGHT + PanelLLamadas.getWidth() + 5;
-            super.setSize(w, INITIAL_HEIGHT);
+            int w = INITIAL_WEIGHT + PanelControl.getWidth() + 5;
+            int h = INITIAL_HEIGHT + PanelLLamadas.getHeight() + 5; 
+            super.setSize(w, h);
 
             //Llenar lista de contactos//
             //Las siguientes validaciones evitan que se limpie la infomacion en pantalla al esconder la lista
