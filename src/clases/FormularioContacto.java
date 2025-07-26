@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,16 +30,26 @@ public class FormularioContacto extends javax.swing.JFrame {
     private Libreta libreta; // Lista de contactos
     private String[] stringContactos; // Arreglo para almacenar los contactos como cadenas
     private String cedula; // Cédula del contacto
-    private Queue<String> pendiente = new LinkedList<>(); // Cola para manejar contactos
+    private Queue<Contacto> pendientes = new LinkedList<>(); // Cola para manejar contactos
     private Stack<Contacto> atendidos; 
     private boolean estadoB = false; // Estado del botón
     private boolean estadoPanel = true; // Estado del panel
     private int selTipo = 0; // Tipo de selección (mostrar cédulas o todo)
+    
+    //Clases encargardas de manipular las listas de interfaz grafica pendientes y atendidos
+    private DefaultListModel<String> lmPendientes = new DefaultListModel<>();
+    private DefaultListModel<String> lmAtendidos = new DefaultListModel<>();
+    
+    
+   
 
+    //Cuando el sistema se inicializa ejecuta este constructor que pertenece a la interfaz grafica GUI.
+    
     public FormularioContacto() {
-        initComponents();
+        initComponents(); //INICIALIZA componentes
+          
         archivo = new Archivo();
-        libreta = new Libreta();
+        libreta = new Libreta();// por medio de la clase archivo busca los contacto que se encuentran en la base de datos (carpeta datos).
 
         setLocationRelativeTo(null);
         super.setSize(INITIAL_WEIGHT, INITIAL_HEIGHT);
@@ -130,19 +141,18 @@ public class FormularioContacto extends javax.swing.JFrame {
         textTelefono = new javax.swing.JTextField();
         provinciasComboBox = new javax.swing.JComboBox<>();
         PanelLLamadas = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListPendientes = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListAtedidos = new javax.swing.JList<>();
         Pendientes = new javax.swing.JLabel();
         Atendidos = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtAteTelefono = new javax.swing.JTextField();
+        txtAteNombre = new javax.swing.JTextField();
         LblTiempo = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         PanelControl = new javax.swing.JPanel();
         bAbrir = new javax.swing.JButton();
         bImportar = new javax.swing.JButton();
@@ -153,6 +163,7 @@ public class FormularioContacto extends javax.swing.JFrame {
         bLimpiarBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaContactos = new javax.swing.JList();
+        btnContactar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -313,10 +324,11 @@ public class FormularioContacto extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Siguiente");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setEnabled(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
 
@@ -328,9 +340,11 @@ public class FormularioContacto extends javax.swing.JFrame {
 
         Atendidos.setText("Atendidos:");
 
-        jTextField1.setText("Telefono");
+        txtAteTelefono.setEditable(false);
+        txtAteTelefono.setText("Telefono");
 
-        jTextField2.setText("Nombre");
+        txtAteNombre.setEditable(false);
+        txtAteNombre.setText("Nombre");
 
         LblTiempo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         LblTiempo.setText("0:00:00");
@@ -344,13 +358,6 @@ public class FormularioContacto extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Contactar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelLLamadasLayout = new javax.swing.GroupLayout(PanelLLamadas);
         PanelLLamadas.setLayout(PanelLLamadasLayout);
         PanelLLamadasLayout.setHorizontalGroup(
@@ -358,21 +365,17 @@ public class FormularioContacto extends javax.swing.JFrame {
             .addGroup(PanelLLamadasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLLamadasLayout.createSequentialGroup()
-                        .addComponent(LblTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(324, 324, 324))
+                    .addComponent(LblTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelLLamadasLayout.createSequentialGroup()
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLLamadasLayout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addGap(54, 54, 54))
                             .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(txtAteTelefono)
                                 .addGap(21, 21, 21)))
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4))
                         .addGap(51, 51, 51)
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,13 +384,14 @@ public class FormularioContacto extends javax.swing.JFrame {
                                 .addGap(148, 148, 148)
                                 .addComponent(Atendidos))
                             .addGroup(PanelLLamadasLayout.createSequentialGroup()
-                                .addGap(188, 188, 188)
-                                .addComponent(jButton2))
-                            .addGroup(PanelLLamadasLayout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(25, 25, 25))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLLamadasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(287, 287, 287))
         );
         PanelLLamadasLayout.setVerticalGroup(
             PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,8 +400,8 @@ public class FormularioContacto extends javax.swing.JFrame {
                     .addGroup(PanelLLamadasLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAteTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addComponent(LblTiempo)
                         .addGap(31, 31, 31)
@@ -407,9 +411,7 @@ public class FormularioContacto extends javax.swing.JFrame {
                         .addGap(72, 72, 72))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelLLamadasLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
+                        .addComponent(btnSiguiente)
                         .addGap(18, 18, 18)
                         .addGroup(PanelLLamadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLLamadasLayout.createSequentialGroup()
@@ -510,6 +512,13 @@ public class FormularioContacto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaContactos);
 
+        btnContactar.setText("Contactar");
+        btnContactar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelControlLayout = new javax.swing.GroupLayout(PanelControl);
         PanelControl.setLayout(PanelControlLayout);
         PanelControlLayout.setHorizontalGroup(
@@ -532,7 +541,10 @@ public class FormularioContacto extends javax.swing.JFrame {
                                 .addComponent(bImportar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(13, 13, 13))))
+                        .addGap(13, 13, 13))
+                    .addGroup(PanelControlLayout.createSequentialGroup()
+                        .addComponent(btnContactar)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelControlLayout.setVerticalGroup(
             PanelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,7 +562,9 @@ public class FormularioContacto extends javax.swing.JFrame {
                     .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btnContactar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelListaContLayout = new javax.swing.GroupLayout(panelListaCont);
@@ -753,19 +767,41 @@ public class FormularioContacto extends javax.swing.JFrame {
     private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
         listar();
     }//GEN-LAST:event_searchTextKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        //pendiente.add(TITLE)
-        for (String stringContacto : stringContactos) {
-            pendiente.add(stringContacto);
+    
+    private void actualizarListas(){
+        lmPendientes.clear();
+            for (Contacto c : pendientes) {
+           
+            lmPendientes.addElement(c.getNombreCompleto());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        jListPendientes.setModel(lmPendientes);
+        btnContactar.setEnabled(pendientes.isEmpty());
+        btnSiguiente.setEnabled(!pendientes.isEmpty());
+    }
+    
+    private void btnContactarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactarActionPerformed
+        lmPendientes = new DefaultListModel<>();
+        for (Contacto c : libreta.getLibreta()) {
+            pendientes.add(c);
+            lmPendientes.addElement(c.getNombreCompleto());
+        }
+        jListPendientes.setModel(lmPendientes);
+        btnContactar.setEnabled(false);
+        btnSiguiente.setEnabled(true);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String siguiente = pendiente.poll();
-        JOptionPane.showMessageDialog(null, siguiente);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        txtAteNombre.setText(" Nombre Completo ");
+        txtAteTelefono.setText(" Telefono ");
+        
+        
+    }//GEN-LAST:event_btnContactarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        Contacto siguiente = pendientes.poll();
+        txtAteNombre.setText(siguiente.getNombreCompleto());
+        txtAteTelefono.setText(siguiente.getTelefono ());
+        actualizarListas();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -817,9 +853,9 @@ public class FormularioContacto extends javax.swing.JFrame {
     private javax.swing.JButton bImportar;
     private javax.swing.JButton bLimpiar;
     private javax.swing.JButton bLimpiarBuscar;
+    private javax.swing.JButton btnContactar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.ButtonGroup gMostrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -835,8 +871,6 @@ public class FormularioContacto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JList listaContactos;
     private javax.swing.JRadioButton mostrarCed;
     private javax.swing.JRadioButton mostrarTodo;
@@ -849,5 +883,7 @@ public class FormularioContacto extends javax.swing.JFrame {
     private javax.swing.JTextField textFechaNac;
     private javax.swing.JTextField textNombre;
     private javax.swing.JTextField textTelefono;
+    private javax.swing.JTextField txtAteNombre;
+    private javax.swing.JTextField txtAteTelefono;
     // End of variables declaration//GEN-END:variables
 }
