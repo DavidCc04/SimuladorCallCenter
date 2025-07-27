@@ -886,7 +886,7 @@ public class FormularioContacto extends javax.swing.JFrame {
             lblTiempo.setText(String.format("%02d:%02d", minutos, seg));
         });
 
-        temporizador.start();
+        temporizador.start(); /////
         
         btnLlamarContacto.setEnabled(false);
         btnSiguiente.setEnabled(false);
