@@ -37,7 +37,7 @@ public class FormularioContacto extends javax.swing.JFrame {
     private boolean estadoB = false; // Estado del botón
     private boolean estadoPanel = true; // Estado del panel
     private int selTipo = 0; // Tipo de selección (mostrar cédulas o todo)
-    private Contacto actual = null;
+    private Contacto porcontactar = null;
 
     //Clases encargardas de manipular las listas de interfaz grafica pendientes y atendidos
     private DefaultListModel<String> lmPendientes = new DefaultListModel<>();
@@ -789,7 +789,7 @@ public class FormularioContacto extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_searchTextKeyReleased
 
-    private void actualizarListas() {
+    private void actualizarListas() {  //ListModel
         lmPendientes.clear();
         for (Contacto c : pendientes) {
 
@@ -820,6 +820,8 @@ public class FormularioContacto extends javax.swing.JFrame {
 
         txtAteNombre.setText(" Nombre Completo ");
         txtAteTelefono.setText(" Telefono ");
+        
+       
 
 
     }//GEN-LAST:event_btnContactarActionPerformed
@@ -829,39 +831,40 @@ public class FormularioContacto extends javax.swing.JFrame {
 //        txtAteNombre.setText(siguiente.getNombreCompleto());
 //        txtAteTelefono.setText(siguiente.getTelefono ());
 //        actualizarListas();
-        actual = pendientes.peek(); //apunta el primero de la lista
-        txtAteNombre.setText(actual.getNombreCompleto());
-        txtAteTelefono.setText(actual.getTelefono());
+        porcontactar = pendientes.peek(); //apunta el primero de la lista
+        txtAteNombre.setText(porcontactar.getNombreCompleto());
+        txtAteTelefono.setText(porcontactar.getTelefono());
         btnSiguiente.setEnabled(true);
         //btnIniciar.setEnabled(false);
         btnLlamarContacto.setEnabled(true);
-        lblTiempo.setText("0:00:00");
+        lblTiempo.setText("00:00:00");
         btnColgarLamada.setEnabled(false);
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnColgarLamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColgarLamadaActionPerformed
         // TODO add your handling code here:
-        if (actual != null) {
+        if (porcontactar != null) {
 
             pendientes.poll(); // se elimina de la cola
-            System.out.println(actual);
-            atendidos.push(actual ); // se agrega a la pila
-            //atendidos.push([actual, temporizador]);
+            //System.out.println(porcontactar);
+            atendidos.push(porcontactar); // se agrega a la pila atendidos mediante el push
+            //atendidos.push(porcontactar.getNombreCompleto() + " - " + temporizador);
             
             txtAteNombre.setText("Nombre" );
             txtAteTelefono.setText("Teléfono");
-            actual = null;  //borra los datos de la variable para que al final al volver a dar click en el boton no vuelva a cargar la lista.
+            porcontactar = null;  //borra los datos de la variable para que al final al volver a dar click en el boton no vuelva a cargar la lista.
             
-        } else {
-            actual = null;
-            txtAteNombre.setText("Nombre");
-            txtAteTelefono.setText("Teléfono");
-            //btnSiguiente.setEnabled(false);
+         } else  {
+           // porcontactar = null;
+            //txtAteNombre.setText("Nombre");
+            //txtAteTelefono.setText("Teléfono");
+            
             JOptionPane.showMessageDialog(this, "No se encuentra en llamada.");
             //btnLlamar.setEnabled(false);
+            //btnSiguiente.setEnabled(false);
             //lblTiempo.setText("00:00");
-        }
+        } 
 
         actualizarListas();
 
@@ -881,9 +884,13 @@ public class FormularioContacto extends javax.swing.JFrame {
 
         temporizador = new Timer(1000, e -> {
             segundos++;
-            int minutos = segundos / 60;
+            
+            int horas = segundos / 3600;
+            int minutos = (segundos % 3600) / 60;
             int seg = segundos % 60;
-            lblTiempo.setText(String.format("%02d:%02d", minutos, seg));
+
+            lblTiempo.setText(String.format("%02d:%02d:%02d", horas, minutos, seg));
+              
         });
 
         temporizador.start(); /////
